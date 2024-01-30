@@ -4,6 +4,11 @@ import tqdm as tqdm
 
 from numba import njit
 from scipy.optimize import linear_sum_assignment
+from numba.core.errors import NumbaDeprecationWarning, NumbaPendingDeprecationWarning
+import warnings
+
+warnings.simplefilter('ignore', category=NumbaDeprecationWarning)
+warnings.simplefilter('ignore', category=NumbaPendingDeprecationWarning)
 
 
 def get_deltas_list(particles):
@@ -70,7 +75,7 @@ def track_particles(xy_locs,start_frame, end_frame,mem_frame,max_distance):
 
 
 @njit
-def disambiguate_couples(particles):
+def disambiguate_couples(particles, min_frames, max_distance):
     coupled_ids = []
     couples = []
     for p_1 , _ in enumerate(particles):
@@ -99,7 +104,7 @@ def disambiguate_couples(particles):
                         distances = np.sqrt(distances_x + distances_y)
   
                             # if np.abs(np.mean(distances))<1.0: 
-                        if len(np.where(distances<=1)[0])>=4: 
+                        if len(np.where(distances<=max_distance)[0])>=min_frames: 
                                     
                                     coupled_ids.append(p_2 )
                                     couples.append([p_1,p_2])
@@ -110,8 +115,8 @@ def disambiguate_couples(particles):
 
     return  coupled_ids, couples
 
-def find_multilobes(particles):
-    coupled_ids, couples = disambiguate_couples(particles)
+def find_multilobes(particles, min_frames, max_distance):
+    coupled_ids, couples = disambiguate_couples(particles, min_frames, max_distance)
 
     for c_1 , _ in enumerate(couples):
         for c_2 , _ in enumerate(couples):
