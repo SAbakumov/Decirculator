@@ -3,7 +3,19 @@ from tensorflow.keras import layers
 
 import os , time, numpy as np 
 
+print("Tensorflow version " + tf.__version__)
 
+try:
+    tpu = tf.distribute.cluster_resolver.TPUClusterResolver()  # TPU detection
+    print('Running on TPU ', tpu.cluster_spec().as_dict()['worker'])
+
+    tf.config.experimental_connect_to_cluster(tpu)
+    tf.tpu.experimental.initialize_tpu_system(tpu)
+    tpu_strategy = tf.distribute.TPUStrategy(tpu)
+    set_tpu = True
+except:
+    print('No TPU detected, running locally on GPU or CPU')
+    set_tpu = False
 
 
 class SaveBestModel(tf.keras.callbacks.Callback):
@@ -47,6 +59,7 @@ class TrainModel():
 
     
     def train(self):
+        
         self.model.compile(optimizer=tf.keras.optimizers.Adam(learning_rate=0.0001),loss=self.penalized_loss)
         save_best_model = SaveBestModel(self.save_path)
         self.model.fit( self.x_data, self.y_data,validation_data=( self.xval_data, self.yval_data),batch_size=16,epochs=1000,verbose=0,callbacks = save_best_model,shuffle=True)
@@ -70,11 +83,21 @@ class TrainModel():
 
     def predict(self, test_data, weight_data):
         self.model.load_weights(weight_data)
+        if set_tpu:
+            with tpu_strategy.scope():
+                self.model.compile()
+                self.model.load_weights(weight_data)
         y_data = []
         for d in range(0,test_data.shape[0],10):
 
             data = test_data[d:d+10,:,:,:]
-            predicted_data = self.model.predict(data)
+            if set_tpu:
+                with tpu_strategy.scope():
+                    print('Using TPU')
+                    predicted_data = self.model.predict(data)
+            else:
+                predicted_data = self.model.predict(data)
+
 
             predicted_data[:,:,:,0] = np.roll(predicted_data[:,:,:,0],12, axis=1)
             predicted_data[:,0:12,:,0] = 0
@@ -91,9 +114,18 @@ class TrainModel():
     def predict_transposed(self, test_data, weight_data):
         self.model.load_weights(weight_data)
         y_data = []
+        if set_tpu:
+            with tpu_strategy.scope():
+                self.model.load_weights(weight_data)
         for d in range(0,test_data.shape[0],10):
             data = np.swapaxes(test_data[d:d+10,:,:,:],1,2)
-            predicted_data = self.model.predict(data)
+            if set_tpu:
+                with tpu_strategy.scope():
+                    print('Using TPU')
+                    predicted_data = self.model.predict(data)
+            else:
+                predicted_data = self.model.predict(data)
+
             predicted_data = np.swapaxes(self.model.predict(data),1,2)
 
             predicted_data[:,:,:,0] = np.roll(predicted_data[:,:,:,0],12, axis=1)
