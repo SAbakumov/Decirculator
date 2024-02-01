@@ -28,7 +28,7 @@ def get_deltas_list_origami(particles,pixel_size,radius):
          
         
 
-            if np.max( r2)>1/(0.108):
+            if np.max( r2)>radius/(pixel_size):
 
                 deltas_list = deltas_list+ part_msd #.append(particle[t+delta_t][0:3]-particle[t][0:3])
     return np.array(deltas_list)
