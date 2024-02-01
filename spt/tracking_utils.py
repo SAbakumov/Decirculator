@@ -11,6 +11,28 @@ warnings.simplefilter('ignore', category=NumbaDeprecationWarning)
 warnings.simplefilter('ignore', category=NumbaPendingDeprecationWarning)
 
 
+def get_deltas_list_origami(particles,pixel_size,radius):
+    deltas_list = []
+    msd_per_part = []
+    num_part = 0
+    for particle in particles: 
+            part_msd = []
+            num_part+=1
+            particle = np.array(particle)
+            for delta_t in range(1,len(particle)):
+                    for t in range(0,len(particle)-delta_t):
+                        part_msd.append(particle[t+delta_t][0:3]-particle[t][0:3])
+            p_msd = np.array(part_msd)
+
+            r2 = np.sqrt(np.power(p_msd[:,1]-p_msd[1,1],2) + np.power(p_msd[:,2] - p_msd[1,2],2))
+         
+        
+
+            if np.max( r2)>1/(0.108):
+
+                deltas_list = deltas_list+ part_msd #.append(particle[t+delta_t][0:3]-particle[t][0:3])
+    return np.array(deltas_list)
+
 def get_deltas_list(particles):
     deltas_list = []
 
