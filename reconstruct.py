@@ -13,7 +13,7 @@ parser = argparse.ArgumentParser(description='Process PSF duplicated microscopy 
 parser.add_argument('--folder_list', type=str, required=True,help='The path to .txt file containing all paths to .tif files to be analyzed.')
 parser.add_argument('--weights', type=str, required=True, help='Path to .h5 file of the weights of the network')
 parser.add_argument('--contrast', type=float, required=True,help = 'Contrast adjustment value for the .tif files.')
-parser.add_argument('--backgr', nargs='?', const='mean', type=str, help ='[Optional] Background subtraction. Can be mean or none')
+parser.add_argument('--backgr', nargs='?', const='mean', type=str, help ='[Optional] Background subtraction. Can be mean or none (default mean)')
 
 args = parser.parse_args()
 
