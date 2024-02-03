@@ -1,0 +1,3 @@
+path/to/tiff/files/file_1.tif
+path/to/tiff/files/file_2.tif
+path/to/tiff/files/file_3.tif
