@@ -40,14 +40,14 @@ Open Terminal or Powershell(Windows):
 
 To perform reconstruction, you'd need to run the reconstruct.py from within the repository folder. There are 4 (3+1 optional) arguments.
 
-The folder_list: this is a .txt file containing all absolute paths to your .tif files that you wish to reconstruct. If there is chronological order in the data,
+- The folder_list: this is a .txt file containing all absolute paths to your .tif files that you wish to reconstruct. If there is chronological order in the data,
 make sure that the files are ordered accordingly. An example of what the folder_list.txt should look like is provided in directory.
 
-The weights: this is a .h5 file containing the weights of the network that you have downloaded from the link above. An absolute path to this file is required as input
+- The weights: this is a .h5 file containing the weights of the network that you have downloaded from the link above. An absolute path to this file is required as input
 
-Contrast: this is a number, that is multiplied with your input data if the contrast differs from the one that the network has been trained on. 
+- Contrast: this is a number, that is multiplied with your input data if the contrast differs from the one that the network has been trained on. 
 
-[Optional] Background:  Can be either mean or none. Default is mean. This argument is to tell which type of subtraction to use for the background.
+- [Optional] Background:  Can be either mean or none. Default is mean. This argument is to tell which type of subtraction to use for the background.
 
 An example call of the function: -> 
 
