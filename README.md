@@ -41,7 +41,7 @@ Open Terminal or Powershell(Windows):
 To perform reconstruction, you'd need to run the reconstruct.py from within the repository folder. There are 4 (3+1 optional) arguments.
 
 - The folder_list: this is a .txt file containing all absolute paths to your .tif files that you wish to reconstruct. If there is chronological order in the data,
-make sure that the files are ordered accordingly. An example of what the folder_list.txt should look like is provided in directory.
+make sure that the files are ordered accordingly. An example of what the folder_list.txt should look like is provided in the repository as folder_list.txt.
 
 - The weights: this is a .h5 file containing the weights of the network that you have downloaded from the link above. An absolute path to this file is required as input
 
