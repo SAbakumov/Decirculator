@@ -70,3 +70,7 @@ optional arguments:
   --contrast CONTRAST   Contrast adjustment value for the .tif files.
   --backgr [BACKGR]     [Optional] Background subtraction. Can be mean or none
 ```
+
+### Output
+
+The output of the reconstruction pipeline are three files: T0_decirculated.tif, T1_decirculated.tif, T2_decirculated.tif, which are 3 different colors corresponding to PSF's in the microscopy setup. These are stored in the same directory as where you've cloned your repository to.
