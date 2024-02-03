@@ -49,7 +49,11 @@ Contrast: this is a number, that is multiplied with your input data if the contr
 
 [Optional] Background:  Can be either mean or none. Default is mean. This argument is to tell which type of subtraction to use for the background.
 
-An example call of the function: -> python reconstruct.py --folder_list PATH/TO/FOLDER/LIST/folder_list.txt --weights PATH/TO/WEIGHTS/model_final_weights.h5 --contrast 1 --backgr mean
+An example call of the function: -> 
+
+```
+python reconstruct.py --folder_list PATH/TO/FOLDER/LIST/folder_list.txt --weights PATH/TO/WEIGHTS/model_final_weights.h5 --contrast 1 --backgr mean
+```
 
 
 The help command can also guide you if needed: python reconstruct.py -h
