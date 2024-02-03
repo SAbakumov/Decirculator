@@ -30,7 +30,7 @@ Install Python 3.9.7+ from https://www.python.org/. Then, follow the instruction
 
 Open Terminal or Powershell(Windows):
 1) Create a new python environment as where PATH_TO_ENVIRONMENT is the desired installation folder.
-   - For MAC/Linux: Open terminal. Then -> sudo pip install virtualenv -> mkdir ATH_TO_ENVIRONMENT && cd PATH_TO_ENVIRONMENT -> virtualenv env -> source env/bin/activate
+   - For MAC/Linux: Open terminal. Then -> sudo pip install virtualenv -> mkdir PATH_TO_ENVIRONMENT && cd PATH_TO_ENVIRONMENT -> virtualenv env -> source env/bin/activate
    - For Windows: Open powershell. Then -> python -m venv PATH_TO_ENVIRONMENT -> PATH_TO_ENVIRONMENT\Scripts\Activate.ps1
 2) Install the required packages by first navigating to the cloned directory folder:
    - cd REPOSITORY_FOLDER
