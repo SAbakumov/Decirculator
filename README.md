@@ -74,3 +74,26 @@ optional arguments:
 ### Output
 
 The output of the reconstruction pipeline are three files: T0_decirculated.tif, T1_decirculated.tif, T2_decirculated.tif, which are 3 different colors corresponding to PSF's in the microscopy setup. These are stored in the same directory as where you've cloned your repository to.
+
+### Training
+
+To run the training, you can call main_train.py with the correct arguments. 
+
+The help command can also guide you if needed: python main_train.py -h
+```
+
+usage: main_train.py [-h] --train_x TRAIN_X --train_y TRAIN_Y --valid_x VALID_X --valid_y VALID_Y
+
+Training for reconstruction of PSF duplicated images
+
+optional arguments:
+  -h, --help         show this help message and exit
+  --train_x TRAIN_X  The path to circulator input training data. Must contain a single .tif file with dimensions of NxN
+  --train_y TRAIN_Y  The path to model output training data. Must contain 3 .tif files, corresponding to 3 channels, with suffices _T0, _T1, _T2
+  --valid_x VALID_X  The path to circulator input validation data. Must contain a single .tif file with dimensions of NxN
+  --valid_y VALID_Y  The path to model output training data. Must contain 3 .tif files, corresponding to 3 channels, with suffices _T0, _T1, _T2
+
+```
+
+
+The files in the train and validation paths must be .tif files, in separate folders, formatted as in description. An example of the data input folder structure can be found in training\example_data\x_data and training\example_data\y_data. 
