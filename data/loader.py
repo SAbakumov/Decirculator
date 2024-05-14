@@ -16,13 +16,13 @@ class Loader():
 
         self.y_data  = []
         for channel in ['T0','T1','T2']:
-            if channel in file:
-                self.y_data = np.expand_dims(np.float16(tifffile.imread(os.path.join(self.y_data_path,file))),-1)
+            for file in os.listdir(self.y_data_path):
+                if channel in file:
+                    self.y_data.append(np.float16(tifffile.imread(os.path.join(self.y_data_path,file))))
 
 
-        self.y_data = [self.y_data[key] for key in self.y_data.keys()]
-        self.y_data = np.float16(np.stack(self.y_data,axis = -1))
-    
+        self.y_data = np.stack(self.y_data,axis =-1)
+ 
     def load_test_data(self, path,background_subtraction):
 
         self.test_data = np.float16(np.expand_dims(tifffile.imread(path),-1))
