@@ -22,9 +22,9 @@ MSD and diffusion coefficient calculation can be found and reproduced.
 
 Installation:
 
-Pull the repository into an empty directory and download the model weights from: 
+Pull the repository into an empty directory and download all the necessary data, which includes the model weights from: 
 
-https://kuleuven-my.sharepoint.com/:f:/g/personal/sergey_abakumov_kuleuven_be/Ekwyl1h7v8hMgk8vjvN1qxUB-5JrfU2N2uE2BasrsM4ArQ?e=wdgPYK
+https://doi.org/10.5281/zenodo.11196841
 
 Install Python 3.9.7+ from https://www.python.org/. Then, follow the instructions:
 
